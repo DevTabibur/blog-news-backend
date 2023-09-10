@@ -1,0 +1,2 @@
+Sun Jul 16 2023 | 21:24:1 [Error Log] error: Error while connecting database:  The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+Sun Jul 16 2023 | 21:30:10 [Error Log] error: Error while connecting database:  connect ECONNREFUSED ::1:27017

@@ -1,0 +1,15 @@
+{
+  "keep": {
+    "days": true,
+    "amount": 14
+  },
+  "auditLog": "D:\\PROJECTS\\MultiMart-Team Project\\multi-mart-backend\\logs\\winston\\error\\.2faa6bc7d88b858080f471ec88334037a22b9629-audit.json",
+  "files": [
+    {
+      "date": 1689521040808,
+      "name": "D:\\PROJECTS\\MultiMart-Team Project\\multi-mart-backend\\logs\\winston\\error\\phu-2023-07-16-21-error.log",
+      "hash": "10ed2af7ca2e0b72aeacecb06009b649a504070ef236d055184585e493e7aa12"
+    }
+  ],
+  "hashType": "sha256"
+}
