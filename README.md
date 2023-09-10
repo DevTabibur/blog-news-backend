@@ -1,6 +1,5 @@
 ## TASK (4/8/23) :: Starting Date ~ End Date will be (20/8/23)
 
-- Team Member API is done (4/8/23)
 - Blog API is done (4/8/23)
 - Service Api is done (4/8/23)
 - Featured Api is done (5/8/23)

@@ -1,7 +1,6 @@
 import { Router } from 'express'
 import { UserRoute } from '../modules/user/user.routes'
 import { AuthRoute } from '../modules/auth/auth.routes'
-import { TeamRoute } from '../modules/team/team.routes'
 import { BlogRoute } from '../modules/blog/blog.routes'
 import { ServiceRoute } from '../modules/services/service.routes'
 import { FeaturedRoute } from '../modules/featured/featured.routes'
@@ -20,10 +19,6 @@ const routes = [
   {
     path: '/users',
     route: UserRoute,
-  },
-  {
-    path: '/team',
-    route: TeamRoute,
   },
   {
     path: '/blog',
