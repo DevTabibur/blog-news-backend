@@ -7,10 +7,13 @@ const categorySchema = new Schema<ICategory>(
       type: String,
       required: true,
     },
+    categoryLink: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true },
 )
-
 
 const CategoryModel = model<ICategory>('Category', categorySchema)
 
