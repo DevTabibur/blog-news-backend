@@ -26,6 +26,8 @@ const postBlog = catchAsync(async (req: Request, res: Response) => {
     category: blogData?.category,
     tags: blogData?.tags,
     cover: file?.filename || '',
+    views: 0,
+    share: 0,
   }
   const blog = await BlogService.postBlogService(article)
   sendSuccessResponse<IArticle>(res, {
@@ -36,11 +38,11 @@ const postBlog = catchAsync(async (req: Request, res: Response) => {
 })
 
 const getSingleBlog = catchAsync(async (req: Request, res: Response) => {
-  const { blogId } = req.params
-  const singleBlog = await BlogService.getSingleBlogService(blogId)
+  const { articleId } = req.params
+  const singleBlog = await BlogService.getSingleBlogService(articleId)
   sendSuccessResponse(res, {
     statusCode: httpStatus.OK,
-    message: `successfully getting ${blogId} blog`,
+    message: `successfully getting ${articleId} blog`,
     data: singleBlog,
   })
 })

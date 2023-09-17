@@ -1,16 +1,28 @@
 import { NextFunction, Request, Response } from 'express'
+import ArticleModel from '../modules/blog/blog.model'
+import ApiError from '../../errors/ApiError'
+import httpStatus from 'http-status'
 
-const trackViews = (req: Request, res: Response, next: NextFunction) => {
+// Initialize an object to store API hit counts
+
+const trackViews = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    console.log('hitted')
-    // const { originalUrl } = req; // Get the requested URL
-    // Implement your logic to track views, e.g., save to a database or log to a file
-    // console.log(`View tracked for URL: ${originalUrl}`);
+    const { path } = req
+    const { articleId } = req.params
+
+    // Find the article by ID
+    const article = await ArticleModel.findById(articleId)
+    if (!article) {
+      throw new ApiError(httpStatus.NOT_FOUND, 'Article is not found')
+    } else {
+      // Increment the view count
+      article.views++
+      await article.save()
+    }
     next()
   } catch (error) {
     next(error)
   }
-  // Continue processing the request
 }
 
 export default trackViews

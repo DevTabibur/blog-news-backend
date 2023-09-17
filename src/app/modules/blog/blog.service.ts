@@ -13,11 +13,11 @@ const postBlogService = async (article: IArticle): Promise<IArticle> => {
   return blog
 }
 
-const getSingleBlogService = async (blogId: string): Promise<IArticle> => {
-  if (!Types.ObjectId.isValid(blogId)) {
+const getSingleBlogService = async (articleId: string): Promise<IArticle> => {
+  if (!Types.ObjectId.isValid(articleId)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid ID')
   }
-  const singleBlog = await ArticleModel.findById(blogId)
+  const singleBlog = await ArticleModel.findById(articleId)
   if (!singleBlog) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Blog is not found')
   }

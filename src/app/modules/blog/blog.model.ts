@@ -23,6 +23,8 @@ const articleSchema = new Schema<IArticle>(
       type: String,
       required: true,
     },
+    views: { type: Number, default: 0 }, // Initialize the view count to 0
+    share: { type: Number, default: 0 }, // Initialize the view count to 0
   },
   { timestamps: true },
 )
