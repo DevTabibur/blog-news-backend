@@ -15,5 +15,8 @@ router.post('/', uploader.single("cover"), BlogController.postBlog)
 // **Get Single Blog By ID / SLUG**
 router.get('/:blogId',  BlogController.getSingleBlog)
 
+// **Delete a blog article
+router.delete('/:articleId', BlogController.deleteArticle)
+
 
 export const BlogRoute = router

@@ -27,6 +27,6 @@ const articleSchema = new Schema<IArticle>(
   { timestamps: true },
 )
 
-const Article = model<IArticle>('Article', articleSchema)
+const ArticleModel = model<IArticle>('Article', articleSchema)
 
-export default Article
+export default ArticleModel
