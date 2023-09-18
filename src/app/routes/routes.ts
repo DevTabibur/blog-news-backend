@@ -3,6 +3,7 @@ import { UserRoute } from '../modules/user/user.routes'
 import { AuthRoute } from '../modules/auth/auth.routes'
 import { BlogRoute } from '../modules/blog/blog.routes'
 import {CategoryRoute} from '../modules/category/category.routes'
+import { SettingRoute } from '../modules/settings/settings.routes'
 
 const router = Router()
 
@@ -22,6 +23,10 @@ const routes = [
   {
     path: '/category',
     route: CategoryRoute,
+  },
+  {
+    path: '/settings',
+    route: SettingRoute,
   },
 ]
 

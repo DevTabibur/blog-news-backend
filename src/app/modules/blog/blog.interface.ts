@@ -6,4 +6,5 @@ export interface IArticle {
   category: string
   views: number
   share: number
+  position: number
 }

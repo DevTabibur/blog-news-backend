@@ -28,6 +28,7 @@ const postBlog = catchAsync(async (req: Request, res: Response) => {
     cover: file?.filename || '',
     views: 0,
     share: 0,
+    position: 1,
   }
   const blog = await BlogService.postBlogService(article)
   sendSuccessResponse<IArticle>(res, {
@@ -61,14 +62,14 @@ export const updateArticle = catchAsync(async (req: Request, res: Response) => {
   const { articleId } = req.params
   const updateData = req.body
   const updateFile = req.file
-  const update:Partial<IArticle> = {
+  const update: Partial<IArticle> = {
     metaTitle: updateData?.metaTitle || '',
     content: updateData?.content || '',
     category: updateData?.category || '',
     tags: updateData?.tags || [],
     cover: updateFile?.filename || '',
-  };
-  
+  }
+
   // console.log('update article', update);
   const result = await BlogService.updateArticleService(articleId, update)
   sendSuccessResponse(res, {
