@@ -11,14 +11,14 @@ const router = Router()
 router.get('/', CategoryController.getAllCategory)
 
 // **Create New Category 
-router.post('/', authGuard(USER_ROLE.ADMIN, USER_ROLE.SUPER_ADMIN), CategoryController.postCategory)
+router.post('/',  CategoryController.postCategory)
 
 // **Delete a CATEGORY
-router.delete('/:categoryId', authGuard(USER_ROLE.ADMIN, USER_ROLE.SUPER_ADMIN), CategoryController.deleteCategory)
+router.delete('/:categoryId',  CategoryController.deleteCategory)
 
 
 // **Update a CATEGORY
-router.patch('/:categoryId', authGuard(USER_ROLE.ADMIN, USER_ROLE.SUPER_ADMIN), CategoryController.updateCategory)
+router.patch('/:categoryId', CategoryController.updateCategory)
 
 
 export const CategoryRoute = router

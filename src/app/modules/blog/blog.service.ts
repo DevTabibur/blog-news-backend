@@ -24,6 +24,18 @@ const getSingleBlogService = async (articleId: string): Promise<IArticle> => {
   return singleBlog
 }
 
+const getArticleByCategoryAndSlugService = async (
+  category: string,
+  slug: string,
+): Promise<IArticle> => {
+  // Find the article in the MongoDB collection based on category and slug
+  const article = await ArticleModel.findOne({ category, slug })
+  if (!article) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Article is not found')
+  }
+  return article
+}
+
 const deleteArticleService = async (
   articleId: string,
 ): Promise<IArticle | null> => {
@@ -32,14 +44,18 @@ const deleteArticleService = async (
 }
 const updateArticleService = async (
   articleId: string,
-  update: Partial<IArticle>
+  update: Partial<IArticle>,
 ): Promise<IArticle | null> => {
   if (!Types.ObjectId.isValid(articleId)) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Article is not found')
   }
-  const data = await ArticleModel.findByIdAndUpdate({ _id: articleId }, update, {
-    new: true,
-  })
+  const data = await ArticleModel.findByIdAndUpdate(
+    { _id: articleId },
+    update,
+    {
+      new: true,
+    },
+  )
   if (!data) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Article update failed')
   }
@@ -51,5 +67,6 @@ export const BlogService = {
   getAllBlogService,
   getSingleBlogService,
   deleteArticleService,
-  updateArticleService
+  updateArticleService,
+  getArticleByCategoryAndSlugService,
 }

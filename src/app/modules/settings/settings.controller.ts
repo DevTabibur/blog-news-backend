@@ -4,17 +4,12 @@ import { SettingsService } from './settings.service'
 import { sendSuccessResponse } from '../../../shared/customResponse'
 import httpStatus from 'http-status'
 
-const updateWebsiteName = catchAsync(async (req: Request, res: Response) => {
-  const { websiteId } = req.params
+const createWebsiteName = catchAsync(async (req: Request, res: Response) => {
   const websiteName = req.body
-
-  const result = await SettingsService.updateWebsiteNameService(
-    websiteId,
-    websiteName,
-  )
+  const result = await SettingsService.createWebsiteNameService(websiteName)
   sendSuccessResponse(res, {
     statusCode: httpStatus.OK,
-    message: 'Website name updated successfully',
+    message: 'Website name created successfully',
     data: result,
   })
 })
@@ -28,7 +23,45 @@ const getWebsiteName = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+const uploadLogo = catchAsync(async (req: Request, res: Response) => {
+  const file = req.file
+  const logo = {
+    logo: file?.filename as string,
+  }
+  const result = await SettingsService.uploadLogoService(logo)
+  sendSuccessResponse(res, {
+    statusCode: httpStatus.OK,
+    message: 'Logo uploaded successfully',
+    data: result,
+  })
+})
+
+const uploadFavIcon = catchAsync(async (req: Request, res: Response) => {
+  const file = req.file
+  const favIcon = {
+    favIcon: file?.filename as string,
+  }
+  const result = await SettingsService.uploadFavIconService(favIcon)
+  sendSuccessResponse(res, {
+    statusCode: httpStatus.OK,
+    message: 'Fav Icon uploaded successfully',
+    data: result,
+  })
+})
+
+const getLogo = catchAsync(async (req: Request, res: Response) => {
+  const result = await SettingsService.getLogoService()
+  sendSuccessResponse(res, {
+    statusCode: httpStatus.OK,
+    message: 'logo retrieved successfully',
+    data: result,
+  })
+})
+
 export const SettingsController = {
-  updateWebsiteName,
+  createWebsiteName,
   getWebsiteName,
+  uploadLogo,
+  getLogo,
+  uploadFavIcon
 }

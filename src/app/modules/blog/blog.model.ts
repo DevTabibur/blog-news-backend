@@ -27,6 +27,14 @@ const articleSchema = new Schema<IArticle>(
       type: Number,
       default: 1,
     },
+    slug:{
+      type:String,
+      required:true
+    },
+    readingTime:{
+      type:Number,
+      required:true
+    },
     views: { type: Number, default: 0 }, // Initialize the view count to 0
     share: { type: Number, default: 0 }, // Initialize the view count to 0
   },

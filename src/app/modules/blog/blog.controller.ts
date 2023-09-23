@@ -6,6 +6,8 @@ import catchAsync from '../../../shared/catchAsync'
 import { BlogService } from './blog.service'
 import { sendSuccessResponse } from '../../../shared/customResponse'
 import ArticleModel from './blog.model'
+import { calculateReadingTime } from '../../helpers/calculateReadingTime'
+import { validateAndFormatInput } from '../../helpers/validateAndFormatInput'
 
 // need to work with it, and need to pagination and filtering
 const getAllBlog = catchAsync(async (req: Request, res: Response) => {
@@ -20,6 +22,8 @@ const getAllBlog = catchAsync(async (req: Request, res: Response) => {
 const postBlog = catchAsync(async (req: Request, res: Response) => {
   const blogData = req.body
   const file = req.file
+  const readingTime = await calculateReadingTime(blogData?.content)
+  const slug = await validateAndFormatInput(blogData?.metaTitle)
   const article: IArticle = {
     metaTitle: blogData?.metaTitle,
     content: blogData?.content,
@@ -29,6 +33,8 @@ const postBlog = catchAsync(async (req: Request, res: Response) => {
     views: 0,
     share: 0,
     position: 1,
+    readingTime: readingTime,
+    slug: slug,
   }
   const blog = await BlogService.postBlogService(article)
   sendSuccessResponse<IArticle>(res, {
@@ -47,6 +53,19 @@ const getSingleBlog = catchAsync(async (req: Request, res: Response) => {
     data: singleBlog,
   })
 })
+
+const getArticleByCategoryAndSlug = catchAsync(
+  async (req: Request, res: Response) => {
+    const { category, slug } = req.params
+    const singleBlogByCategoryAndSlug =
+      await BlogService.getArticleByCategoryAndSlugService(category, slug)
+    sendSuccessResponse(res, {
+      statusCode: httpStatus.OK,
+      message: `successfully getting ${category} and ${slug} article`,
+      data: singleBlogByCategoryAndSlug,
+    })
+  },
+)
 
 export const deleteArticle = catchAsync(async (req: Request, res: Response) => {
   const { articleId } = req.params
@@ -83,6 +102,7 @@ export const BlogController = {
   getAllBlog,
   postBlog,
   getSingleBlog,
+  getArticleByCategoryAndSlug,
   deleteArticle,
   updateArticle,
 }

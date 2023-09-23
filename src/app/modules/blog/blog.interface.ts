@@ -7,4 +7,6 @@ export interface IArticle {
   views: number
   share: number
   position: number
+  slug: string
+  readingTime: number
 }
